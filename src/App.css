@@ -53,7 +53,7 @@ body.dark-mode {
 }
 
 .todo-app {
-  max-width: 800px;
+  max-width: 1200px;
   min-width: 350px;
   width: 100%;
   min-height: 600px;
@@ -253,7 +253,7 @@ select.form-control:focus {
   flex-direction: column;
   position: relative;
   margin-bottom: 30px;
-  max-height: 400px;
+  max-height: 500px;
   overflow-y: auto;
   padding-right: 5px;
 }
@@ -280,6 +280,8 @@ select.form-control:focus {
   padding: 16px;
   border-radius: 8px;
   width: 100%;
+  min-height: 80px;
+  height: auto;
   background: linear-gradient(90deg, #f9fafb 0%, #f3f4f6 100%);
   transition: var(--transition);
   position: relative;
