@@ -1,0 +1,20 @@
+.test-btn {
+    border: 2px solid black;
+    margin-top: 20px;
+    background-color: #4f5768;
+    color: #61dafb;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.1s ease 
+}
+
+.test-btn:hover {
+    background-color: #3e4a5b;
+}
+.test-btn:active {
+    background-color: #2e3a4b;
+    transform: scale(0.98);
+}
