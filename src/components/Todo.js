@@ -1,38 +1,77 @@
 import React from 'react';
-import { RiCloseCircleLine } from 'react-icons/ri';
-import { TiEdit } from 'react-icons/ti';
+import { RiDeleteBinLine, RiEdit2Line } from 'react-icons/ri';
 import { FaRegCircle, FaRegCheckCircle } from 'react-icons/fa';
 
-function Todo({ todo, completeTodo, removeTodo, setEdit }) {
+function Todo({ todo, completeTodo, removeTodo, setEdit, categories }) {
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const now = new Date();
+    const yesterday = new Date(now);
+    yesterday.setDate(now.getDate() - 1);
+    
+    // Check if date is today
+    if (date.toDateString() === now.toDateString()) {
+      return `Today, ${date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+    } 
+    // Check if date is yesterday
+    else if (date.toDateString() === yesterday.toDateString()) {
+      return `Yesterday, ${date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+    }
+    // Otherwise return full date
+    return `${date.toLocaleDateString()} - ${date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+  };
+
+  const category = categories.find(cat => cat.id === todo.categoryId);
+
   return (
     <div
-      className={todo.isComplete ? 'todo-row complete' : 'todo-row'}
+      className={`todo-row ${todo.isComplete ? 'complete' : ''} ${todo.priority ? 'priority-' + todo.priority : ''}`}
     >
-      <div 
-        className="todo-checkbox" 
-        onClick={() => completeTodo(todo.id)}
-      >
-        {todo.isComplete ? 
-          <FaRegCheckCircle style={{color: '#10b981', marginRight: '10px'}} /> : 
-          <FaRegCircle style={{color: '#6b7280', marginRight: '10px'}} />
-        }
-      </div>
-      <div 
-        className="todo-text" 
-        onClick={() => completeTodo(todo.id)}
-      >
-        {todo.text}
+      <div className="todo-info">
+        <div className="todo-header">
+          {category && (
+            <span className="category-tag" style={{ backgroundColor: category.color }}>
+              {category.name}
+            </span>
+          )}
+          <span className="todo-date">
+            Created: {formatDate(todo.dateCreated)}
+          </span>
+        </div>
+        
+        <div className="todo-text">
+          <div 
+            className="todo-checkbox" 
+            onClick={() => completeTodo(todo.id)}
+          >
+            {todo.isComplete ? 
+              <FaRegCheckCircle style={{color: 'var(--success)'}} /> : 
+              <FaRegCircle style={{color: 'var(--text-secondary)'}} />
+            }
+          </div>
+          {todo.text}
+        </div>
       </div>
       
       <div className='icons'>
-        <TiEdit
-          onClick={() => setEdit({ id: todo.id, value: todo.text })}
-          className='edit-icon'
-        />
-        <RiCloseCircleLine
+        <div 
+          className="icon-btn" 
+          onClick={() => setEdit({ 
+            id: todo.id, 
+            value: todo.text, 
+            categoryId: todo.categoryId, 
+            priority: todo.priority || 'medium',
+            isComplete: todo.isComplete
+          })}
+        >
+          <RiEdit2Line className='edit-icon' />
+        </div>
+        <div 
+          className="icon-btn" 
           onClick={() => removeTodo(todo.id)}
-          className='delete-icon'
-        />
+        >
+          <RiDeleteBinLine className='delete-icon' />
+        </div>
       </div>
     </div>
   );
