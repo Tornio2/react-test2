@@ -13,7 +13,7 @@ function Header() {
 
   return (
     <>
-      <h1>What's the Plan for Today?</h1>
+      <h1>To-do Application (find a name)</h1>
       <div className="date-display">
         {formatDate()}
       </div>

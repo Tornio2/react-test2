@@ -472,6 +472,7 @@ select.form-control:focus {
   left: 0;
   right: 0;
   bottom: 0;
+  border-radius: var(--radius);
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
@@ -488,6 +489,7 @@ select.form-control:focus {
   max-height: 80vh;
   overflow-y: auto;
   position: relative;
+  color: var(--text-primary);
 }
 
 .modal-close {
@@ -499,10 +501,14 @@ select.form-control:focus {
   font-size: 24px;
   cursor: pointer;
   color: var(--text-secondary);
+  transition: var(--transition);
+}
+.dark-mode .modal-close {
+  color: var(--text-primary);
 }
 
 /* Category manager styles */
-.category-manager h2 {
+.category-manager h2, .settings-panel h2 {
   margin-bottom: 20px;
   color: var(--primary);
 }
@@ -512,6 +518,10 @@ select.form-control:focus {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
+}
+
+.category-form input.todo-input {
+  color: var(--text-primary);
 }
 
 .category-list {
@@ -527,10 +537,12 @@ select.form-control:focus {
   padding: 10px;
   border-radius: 6px;
   background: rgba(255, 255, 255, 0.3);
+  color: var(--text-primary); 
 }
 
 .dark-mode .category-item {
   background: rgba(15, 23, 42, 0.3);
+  color: var(--text-primary); 
 }
 
 .category-color {
@@ -543,6 +555,8 @@ select.form-control:focus {
 .category-name-display {
   display: flex;
   align-items: center;
+    color: var(--text-primary);
+
 }
 
 /* Settings panel styles */
