@@ -2,9 +2,15 @@ import React from 'react';
 import { FaFileExport } from 'react-icons/fa';
 import '../../styles/Settings.css';
 
-
 function ExportSettings({ todos, categories, stats }) {
   const exportData = (format) => {
+    // Get current date and time formatted as YYYY-MM-DD_HH-MM-SS
+    const now = new Date();
+    const dateString = now.toISOString()
+      .replace(/[T]/g, '_')
+      .replace(/[:.]/g, '-')
+      .split('.')[0];
+    
     // Prepare the data to export
     const dataToExport = {
       todos,
@@ -15,7 +21,7 @@ function ExportSettings({ todos, categories, stats }) {
         completed: stats.completed,
         archived: stats.archived
       },
-      exportDate: new Date().toISOString()
+      exportDate: now.toISOString()
     };
     
     let fileContent;
@@ -26,7 +32,7 @@ function ExportSettings({ todos, categories, stats }) {
     if (format === 'json') {
       fileContent = JSON.stringify(dataToExport, null, 2);
       fileType = 'application/json';
-      fileName = 'task-manager-export.json';
+      fileName = `task-manager-export_${dateString}.json`;
     } else if (format === 'csv') {
       // Create CSV content
       let csvContent = 'ID,Text,Status,Priority,Category,Created Date,Updated Date,Completed Date,Archived Date\n';
@@ -44,7 +50,7 @@ function ExportSettings({ todos, categories, stats }) {
       
       fileContent = csvContent;
       fileType = 'text/csv';
-      fileName = 'task-manager-export.csv';
+      fileName = `task-manager-export_${dateString}.csv`;
     }
     
     // Create a blob and download the file
@@ -63,7 +69,8 @@ function ExportSettings({ todos, categories, stats }) {
     <div className="setting-section">
       <h3>Export Data</h3>
       <p className="setting-description">
-        Export your tasks, categories, and statistics to a file.
+        Export your tasks, categories, and statistics to a file. 
+        Files are automatically named with the current date and time.
       </p>
       <div className="export-buttons">
         <button 
