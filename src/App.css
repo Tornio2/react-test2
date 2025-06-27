@@ -96,26 +96,7 @@ body.dark-mode {
   opacity: 0.6;
 }
 
-/* Form styles */
-
-
-/* Filter bar styles */
-/* moved to styles folder */
-
-/* Todo item styles */
-
-
-/* Stats panel styles */
-
-
-/* Modal styles */
-
-
-/* Category manager styles */
-/* moved in styles folder */
-
-/* Settings panel styles */
-/* .settings-panel h2 {
+.settings-panel h2 {
   margin-bottom: 20px;
   color: var(--primary);
 }
@@ -130,13 +111,11 @@ body.dark-mode {
   gap: 10px;
   cursor: pointer;
   color: var(--text-primary);
-} */
+}
 
-/* Responsive adjustments */
+
 @media screen and (max-width: 600px) {
   .todo-app {
     padding: 20px;
   }
-  
-
 }
