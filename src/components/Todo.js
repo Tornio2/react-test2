@@ -1,6 +1,7 @@
 import React from 'react';
 import { RiDeleteBinLine, RiEdit2Line } from 'react-icons/ri';
 import { FaRegCircle, FaRegCheckCircle } from 'react-icons/fa';
+import '../styles/Todo.css';
 
 function Todo({ todo, completeTodo, removeTodo, setEdit, categories }) {
   const formatDate = (dateString) => {

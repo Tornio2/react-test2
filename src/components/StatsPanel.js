@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaChartPie, FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import '../styles/StatsPanel.css'; 
 
 function StatsPanel({ stats }) {
   const [isExpanded, setIsExpanded] = useState(false);

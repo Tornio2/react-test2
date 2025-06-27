@@ -1,0 +1,131 @@
+
+.todo-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 8px 0;
+  padding: 16px;
+  border-radius: 8px;
+  width: 100%;
+  min-height: 80px;
+  height: auto;
+  background: linear-gradient(90deg, #f9fafb 0%, #f3f4f6 100%);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.dark-mode .todo-row {
+  background: linear-gradient(90deg, #334155 0%, #1e293b 100%);
+}
+
+.todo-row:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.07);
+}
+
+.todo-row.complete {
+  background: linear-gradient(90deg, #f1f5f9 0%, #e5e7eb 100%);
+}
+
+.dark-mode .todo-row.complete {
+  background: linear-gradient(90deg, #1f2937 0%, #111827 100%);
+}
+
+.todo-row::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 5px;
+  background-color: var(--info);
+}
+
+.todo-row.priority-high::before {
+  background-color: var(--danger);
+}
+
+.todo-row.priority-medium::before {
+  background-color: var(--warning);
+}
+
+.todo-row.priority-low::before {
+  background-color: var(--success);
+}
+
+.todo-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.todo-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 5px;
+}
+
+.category-tag {
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 500;
+  color: white;
+}
+
+.todo-date {
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+
+.todo-text {
+  flex: 1;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  max-width: 100%;
+  color: var(--text-primary);
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.todo-checkbox {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.icon-btn {
+  padding: 6px;
+  border-radius: 50%;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-btn:hover {
+  background-color: var(--primary-light);
+}
+
+.delete-icon {
+  color: var(--danger);
+}
+
+.edit-icon {
+  color: var(--info);
+}

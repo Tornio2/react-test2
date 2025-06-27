@@ -1,5 +1,5 @@
 import React from 'react';
-
+import '../styles/Header.css'; 
 function Header() {
   const formatDate = () => {
     const options = { 
@@ -13,7 +13,7 @@ function Header() {
 
   return (
     <>
-      <h1>To-do Application (find a name)</h1>
+      <h1 className="header-title">To-do Application (find a name)</h1>
       <div className="date-display">
         {formatDate()}
       </div>

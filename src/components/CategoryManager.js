@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaPlus, FaTrash } from 'react-icons/fa';
+import '../styles/CategoryManager.css'
 
 function CategoryManager({ categories, addCategory, removeCategory, onClose }) {
   const [name, setName] = useState('');

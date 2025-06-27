@@ -1,5 +1,7 @@
 import React from 'react';
 import { FaSearch, FaSortAmountDown, FaSortAmountUp, FaSortAlphaDown, FaFilter } from 'react-icons/fa';
+import '../styles/FilterBar.css'; 
+
 
 function FilterBar({ filter, setFilter, sortMethod, setSortMethod, categories }) {
   const handleStatusFilter = (status) => {

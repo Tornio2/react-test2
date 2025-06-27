@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { FaTimes } from 'react-icons/fa';
+import '../styles/Modal.css'; 
 
 function Modal({ children, onClose }) {
   useEffect(() => {

@@ -1,0 +1,91 @@
+.todo-form {
+  margin-bottom: 32px;
+}
+
+.form-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.todo-input {
+  padding: 14px 16px;
+  border-radius: 8px;
+  border: 2px solid var(--primary);
+  outline: none;
+  flex: 1;
+  min-width: 200px;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 16px;
+  transition: var(--transition);
+}
+
+.todo-input::placeholder {
+  color: var(--text-tertiary);
+}
+
+.todo-input:focus {
+  border-color: var(--primary-hover);
+  box-shadow: 0 0 8px rgba(109, 40, 217, 0.4);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  min-width: 120px;
+}
+
+.form-group label {
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+select.form-control {
+  padding: 10px;
+  border-radius: 8px;
+  border: 2px solid var(--text-tertiary);
+  background: transparent;
+  color: var(--text-primary);
+  min-height: 45px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+select.form-control:focus {
+  border-color: var(--primary);
+  outline: none;
+}
+
+.todo-button {
+  padding: 14px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  outline: none;
+  background: var(--primary);
+  color: #fff;
+  text-transform: capitalize;
+  font-size: 16px;
+  transition: var(--transition);
+  min-height: 45px;
+  min-width: 110px;
+}
+
+.todo-button:hover {
+  background: var(--primary-hover);
+  box-shadow: 0 2px 10px rgba(124, 58, 237, 0.5);
+}
+
+@media screen and (max-width: 600px) {
+  
+  .form-row, .filter-row {
+    flex-direction: column;
+  }
+  
+  .todo-button {
+    width: 100%;
+  }
+}
