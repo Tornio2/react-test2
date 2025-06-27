@@ -8,9 +8,16 @@
 
 .filter-row {
   display: flex;
-  gap: 10px;
+  gap: 20px;
   margin-bottom: 10px;
   flex-wrap: wrap;
+}
+
+.filter-row button {
+    margin-right: 2px;
+}
+.filter-row button:last-child {
+  margin-right: 0;
 }
 
 .search-input {
