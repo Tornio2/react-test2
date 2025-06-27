@@ -23,6 +23,19 @@
   flex-wrap: wrap;
 }
 
+.category-stats-header {
+  margin: 15px 0 10px;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.category-stats {
+  margin-top: 15px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 10px;
+}
+
 .stat-box {
   flex: 1;
   min-width: 100px;
@@ -54,12 +67,7 @@
   color: var(--text-secondary);
 }
 
-.category-stats {
-  margin-top: 15px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-  gap: 10px;
-}
+
 
 @media screen and (max-width: 600px) {
   .category-stats {

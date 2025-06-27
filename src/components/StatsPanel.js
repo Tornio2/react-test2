@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaChartPie, FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import { FaChartPie, FaChevronDown, FaChevronUp, FaArchive } from 'react-icons/fa';
 import '../styles/StatsPanel.css'; 
 
 function StatsPanel({ stats }) {
@@ -36,11 +36,19 @@ function StatsPanel({ stats }) {
               <div className="stat-number">{stats.completed}</div>
               <div className="stat-label">Completed Tasks</div>
             </div>
+            
+            <div className="stat-box archived">
+              <div className="stat-number">
+                {/* <FaArchive style={{ marginRight: '5px' }} /> */}
+                {stats.archived}
+              </div>
+              <div className="stat-label">Archived Tasks</div>
+            </div>
           </div>
           
           {stats.categories.length > 0 && (
             <>
-              <h4 style={{ margin: '15px 0 10px', fontSize: '14px', color: 'var(--text-secondary)' }}>
+              <h4 className = "category-stats-header">
                 Tasks by Category
               </h4>
               <div className="category-stats">
