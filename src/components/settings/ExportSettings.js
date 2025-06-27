@@ -4,12 +4,15 @@ import '../../styles/Settings.css';
 
 function ExportSettings({ todos, categories, stats }) {
   const exportData = (format) => {
-    // Get current date and time formatted as YYYY-MM-DD_HH-MM-SS
+    // Get current date and time formatted as YYYY-MM-DD__HH-MM
     const now = new Date();
-    const dateString = now.toISOString()
-      .replace(/[T]/g, '_')
-      .replace(/[:.]/g, '-')
-      .split('.')[0];
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    
+    const dateString = `${year}-${month}-${day}__${hours}-${minutes}`;
     
     // Prepare the data to export
     const dataToExport = {
@@ -70,7 +73,7 @@ function ExportSettings({ todos, categories, stats }) {
       <h3>Export Data</h3>
       <p className="setting-description">
         Export your tasks, categories, and statistics to a file. 
-        Files are automatically named with the current date and time.
+        You can import this file later to restore your data.
       </p>
       <div className="export-buttons">
         <button 

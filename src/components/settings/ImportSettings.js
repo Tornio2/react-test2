@@ -266,7 +266,8 @@ function ImportSettings({ setTodos, setCategories, todos, categories }) {
     <div className="setting-section">
       <h3>Import Data</h3>
       <p className="setting-description">
-        Import tasks and categories from a previously exported file.
+        Import tasks and categories from a previously exported file. 
+        <br />Supported formats: JSON and CSV.
       </p>
       
       <div className="import-options">
