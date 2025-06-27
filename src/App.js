@@ -367,8 +367,10 @@ function App() {
                 darkMode={darkMode}
                 setDarkMode={setDarkMode}
                 todos={todos}
-                categories={categories}
+                categories={ categories }
                 stats={stats}
+                setTodos={setTodos}
+                setCategories={setCategories}
                 onClose={() => setShowModal(false)}
               />
             )}

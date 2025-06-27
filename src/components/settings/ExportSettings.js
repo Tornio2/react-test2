@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaFileExport } from 'react-icons/fa';
-import '../../styles/AppearanceSettings.css';
+import '../../styles/Settings.css';
 
 
 function ExportSettings({ todos, categories, stats }) {

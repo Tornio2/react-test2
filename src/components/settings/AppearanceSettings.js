@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../styles/AppearanceSettings.css';
+import '../../styles/Settings.css';
 
 function AppearanceSettings({ darkMode, setDarkMode }) {
   return (
