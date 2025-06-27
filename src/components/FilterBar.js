@@ -27,16 +27,28 @@ function FilterBar({ filter, setFilter, sortMethod, setSortMethod, categories })
     setFilter({ ...filter, archived });
   };
 
+  const searchIcon = <FaSearch style={{ marginRight: '5px', color: 'var(--text-secondary)', fontSize: '12px' }} />;
+
   return (
     <div className="filter-bar">
       <div className="filter-row">
-        <div className="search-container" style={{ flex: 1 }}>
+        <div className="search-container" style={{ flex: 1, position: 'relative' }}>
+          <FaSearch style={{ 
+            position: 'absolute', 
+            left: '10px', 
+            top: '50%', 
+            transform: 'translateY(-50%)', 
+            color: 'var(--text-secondary)', 
+            fontSize: '14px',
+            pointerEvents: 'none'
+          }} />
           <input
             type="text"
             placeholder="Search tasks..."
             value={filter.search}
             onChange={handleSearch}
             className="search-input"
+            style={{ paddingLeft: '35px' }}
           />
         </div>
         <select
