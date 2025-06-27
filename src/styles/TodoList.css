@@ -1,23 +1,23 @@
 .todo-container {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  margin-bottom: 30px;
-  max-height: 500px;
-  overflow-y: auto;
-  padding-right: 5px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-bottom: 30px;
+    max-height: 500px;
+    overflow-y: auto;
+    padding-right: 5px;
 }
 
 .todo-container::-webkit-scrollbar {
-  width: 6px;
+    width: 6px;
 }
 
 .todo-container::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.05);
-  border-radius: 10px;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
 }
 
 .todo-container::-webkit-scrollbar-thumb {
-  background: var(--primary);
-  border-radius: 10px;
+    background: var(--primary);
+    border-radius: 10px;
 }

@@ -1,50 +1,50 @@
 .category-manager h2, .settings-panel h2 {
-  margin-bottom: 20px;
-  color: var(--primary);
+    margin-bottom: 20px;
+    color: var(--primary);
 }
 
 .category-form {
-  margin-bottom: 20px;
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
 .category-form input.todo-input {
-  color: var(--text-primary);
+    color: var(--text-primary);
 }
 
 .category-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .category-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  border-radius: 6px;
-  background: rgba(255, 255, 255, 0.3);
-  color: var(--text-primary); 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.3);
+    color: var(--text-primary); 
 }
 
 .dark-mode .category-item {
-  background: rgba(15, 23, 42, 0.3);
-  color: var(--text-primary); 
+    background: rgba(15, 23, 42, 0.3);
+    color: var(--text-primary); 
 }
 
 .category-color {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  margin-right: 10px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 10px;
 }
 
 .category-name-display {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
     color: var(--text-primary);
 
 }
