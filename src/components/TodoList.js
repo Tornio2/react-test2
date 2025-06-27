@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import TodoForm from './TodoForm';
 import Todo from './Todo';
-import '../styles/TodoList.css'; 
+import '../styles/TodoList.css';
 
-function TodoList({ todos, completeTodo, removeTodo, updateTodo, categories }) {
+function TodoList({ todos, completeTodo, removeTodo, updateTodo, categories, archiveTodo, restoreTodo }) {
   const [edit, setEdit] = useState({
     id: null,
     value: '',
@@ -38,6 +38,8 @@ function TodoList({ todos, completeTodo, removeTodo, updateTodo, categories }) {
           todo={todo}
           completeTodo={completeTodo}
           removeTodo={removeTodo}
+          archiveTodo={archiveTodo}
+          restoreTodo={restoreTodo}
           setEdit={setEdit}
           categories={categories}
         />

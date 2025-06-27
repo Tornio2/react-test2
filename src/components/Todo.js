@@ -1,10 +1,12 @@
 import React from 'react';
 import { RiDeleteBinLine, RiEdit2Line } from 'react-icons/ri';
-import { FaRegCircle, FaRegCheckCircle } from 'react-icons/fa';
-import '../styles/Todo.css';
+import { FaRegCircle, FaRegCheckCircle, FaArchive, FaInbox } from 'react-icons/fa';
+import '../styles/Todo.css'; 
 
-function Todo({ todo, completeTodo, removeTodo, setEdit, categories }) {
+function Todo({ todo, completeTodo, removeTodo, setEdit, categories, archiveTodo, restoreTodo }) {
   const formatDate = (dateString) => {
+    if (!dateString) return '';
+    
     const date = new Date(dateString);
     const now = new Date();
     const yesterday = new Date(now);
@@ -26,7 +28,7 @@ function Todo({ todo, completeTodo, removeTodo, setEdit, categories }) {
 
   return (
     <div
-      className={`todo-row ${todo.isComplete ? 'complete' : ''} ${todo.priority ? 'priority-' + todo.priority : ''}`}
+      className={`todo-row ${todo.isComplete ? 'complete' : ''} ${todo.isArchived ? 'archived' : ''} ${todo.priority ? 'priority-' + todo.priority : ''}`}
     >
       <div className="todo-info">
         <div className="todo-header">
@@ -36,7 +38,7 @@ function Todo({ todo, completeTodo, removeTodo, setEdit, categories }) {
             </span>
           )}
           <span className="todo-date">
-            Created: {formatDate(todo.dateCreated)}
+            {todo.isArchived ? 'Archived: ' + formatDate(todo.archivedAt) : 'Created: ' + formatDate(todo.dateCreated)}
           </span>
         </div>
         
@@ -55,21 +57,46 @@ function Todo({ todo, completeTodo, removeTodo, setEdit, categories }) {
       </div>
       
       <div className='icons'>
-        <div 
-          className="icon-btn" 
-          onClick={() => setEdit({ 
-            id: todo.id, 
-            value: todo.text, 
-            categoryId: todo.categoryId, 
-            priority: todo.priority || 'medium',
-            isComplete: todo.isComplete
-          })}
-        >
-          <RiEdit2Line className='edit-icon' />
-        </div>
+        {!todo.isArchived && todo.isComplete && (
+          <div 
+            className="icon-btn" 
+            onClick={() => archiveTodo(todo.id)}
+            title="Archive Task"
+          >
+            <FaArchive style={{color: 'var(--warning)'}} />
+          </div>
+        )}
+        
+        {todo.isArchived && (
+          <div 
+            className="icon-btn" 
+            onClick={() => restoreTodo(todo.id)}
+            title="Restore Task"
+          >
+            <FaInbox style={{color: 'var(--info)'}} />
+          </div>
+        )}
+        
+        {!todo.isArchived && (
+          <div 
+            className="icon-btn" 
+            onClick={() => setEdit({ 
+              id: todo.id, 
+              value: todo.text, 
+              categoryId: todo.categoryId, 
+              priority: todo.priority || 'medium',
+              isComplete: todo.isComplete
+            })}
+            title="Edit Task"
+          >
+            <RiEdit2Line className='edit-icon' />
+          </div>
+        )}
+        
         <div 
           className="icon-btn" 
           onClick={() => removeTodo(todo.id)}
+          title="Delete Task"
         >
           <RiDeleteBinLine className='delete-icon' />
         </div>

@@ -26,14 +26,13 @@
 body {
   background: var(--background);
   min-height: 100vh;
-  display: flex;
+  /* display: flex;  */ /* Not yet sure if i want to do it this way... */
   justify-content: center;
   align-items: center;
   padding: 20px;
   transition: var(--transition);
 }
 
-/* Dark Mode Styles */
 body.dark-mode {
   background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
 }

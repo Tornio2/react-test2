@@ -1,7 +1,6 @@
 import React from 'react';
-import { FaSearch, FaSortAmountDown, FaSortAmountUp, FaSortAlphaDown, FaFilter } from 'react-icons/fa';
+import { FaSearch, FaSortAmountDown, FaSortAmountUp, FaSortAlphaDown, FaFilter, FaArchive } from 'react-icons/fa';
 import '../styles/FilterBar.css'; 
-
 
 function FilterBar({ filter, setFilter, sortMethod, setSortMethod, categories }) {
   const handleStatusFilter = (status) => {
@@ -22,6 +21,10 @@ function FilterBar({ filter, setFilter, sortMethod, setSortMethod, categories })
 
   const handleSort = (sort) => {
     setSortMethod(sort);
+  };
+
+  const handleArchivedFilter = (archived) => {
+    setFilter({ ...filter, archived });
   };
 
   return (
@@ -68,6 +71,28 @@ function FilterBar({ filter, setFilter, sortMethod, setSortMethod, categories })
             onClick={() => handleStatusFilter('completed')}
           >
             Completed
+          </button>
+        </div>
+
+        <div>
+          <FaArchive style={{ marginRight: '5px', color: 'var(--text-secondary)', fontSize: '12px' }} />
+          <button 
+            className={`filter-button ${filter.archived === 'active' ? 'active' : ''}`} 
+            onClick={() => handleArchivedFilter('active')}
+          >
+            Current
+          </button>
+          <button 
+            className={`filter-button ${filter.archived === 'archived' ? 'active' : ''}`} 
+            onClick={() => handleArchivedFilter('archived')}
+          >
+            Archived
+          </button>
+          <button 
+            className={`filter-button ${filter.archived === 'all' ? 'active' : ''}`} 
+            onClick={() => handleArchivedFilter('all')}
+          >
+            All
           </button>
         </div>
       </div>

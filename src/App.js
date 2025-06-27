@@ -38,6 +38,7 @@ function App() {
     priority: 'all',
     category: 'all',
     search: '',
+    archived: 'active', // Add new archived filter, default to showing only active
   });
   
   const [sortMethod, setSortMethod] = useState('date-desc');
@@ -78,7 +79,8 @@ function App() {
       {
         ...todo,
         dateCreated: new Date().toISOString(),
-        dateUpdated: new Date().toISOString()
+        dateUpdated: new Date().toISOString(),
+        isArchived: false, // Add isArchived property
       }, 
       ...todos
     ];
@@ -123,6 +125,36 @@ function App() {
     setTodos(updatedTodos);
   };
 
+  // Archive Task functionality
+  const archiveTodo = id => {
+    let updatedTodos = todos.map(todo => {
+      if (todo.id === id) {
+        return {
+          ...todo, 
+          isArchived: true,
+          archivedAt: new Date().toISOString()
+        };
+      }
+      return todo;
+    });
+    setTodos(updatedTodos);
+  };
+
+  // Restore archive Todo
+  const restoreTodo = id => {
+    let updatedTodos = todos.map(todo => {
+      if (todo.id === id) {
+        return {
+          ...todo, 
+          isArchived: false,
+          archivedAt: null
+        };
+      }
+      return todo;
+    });
+    setTodos(updatedTodos);
+  };
+
   // Add new category
   const addCategory = (category) => {
     if (!category.name || /^\s*$/.test(category.name)) {
@@ -156,6 +188,10 @@ function App() {
 
   // Filter todos based on current filters
   const filteredTodos = todos.filter(todo => {
+    // Filter by archived status
+    if (filter.archived === 'active' && todo.isArchived) return false;
+    if (filter.archived === 'archived' && !todo.isArchived) return false;
+    
     // Filter by status
     if (filter.status === 'active' && todo.isComplete) return false;
     if (filter.status === 'completed' && !todo.isComplete) return false;
@@ -195,10 +231,11 @@ function App() {
   // Calculate statistics
   const stats = {
     total: todos.length,
-    active: todos.filter(todo => !todo.isComplete).length,
-    completed: todos.filter(todo => todo.isComplete).length,
+    active: todos.filter(todo => !todo.isComplete && !todo.isArchived).length,
+    completed: todos.filter(todo => todo.isComplete && !todo.isArchived).length,
+    archived: todos.filter(todo => todo.isArchived).length,
     categories: categories.map(category => {
-      const count = todos.filter(todo => todo.categoryId === category.id).length;
+      const count = todos.filter(todo => todo.categoryId === category.id && !todo.isArchived).length;
       return { ...category, count };
     })
   };
@@ -247,6 +284,8 @@ function App() {
           completeTodo={completeTodo}
           removeTodo={removeTodo}
           updateTodo={updateTodo}
+          archiveTodo={archiveTodo}
+          restoreTodo={restoreTodo}
           categories={categories}
         />
         
@@ -275,7 +314,7 @@ function App() {
                     Dark Mode
                   </label>
                 </div>
-                <button onClick={() => setShowModal(false)}>Close</button>
+                <button onClick={() => setShowModal(false)} className="todo-button">Close</button>
               </div>
             )}
           </Modal>
