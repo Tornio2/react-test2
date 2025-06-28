@@ -1,17 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
-import TodoForm from './components/TodoForm';
-import TodoList from './components/TodoList';
-import Header from './components/Header';
-import CategoryManager from './components/CategoryManager';
-import FilterBar from './components/FilterBar';
-import StatsPanel from './components/StatsPanel';
-import Modal from './components/Modal';
-import { FaCog } from 'react-icons/fa';
-import { FaDownload } from 'react-icons/fa';
-import { FaFileExport } from 'react-icons/fa';
-import Settings from './components/Settings';
-
+import HomePage from './pages/HomePage';
+import SettingsPage from './pages/SettingsPage';
 
 function App() {
   const [todos, setTodos] = useState(() => {
@@ -42,12 +33,10 @@ function App() {
     priority: 'all',
     category: 'all',
     search: '',
-    archived: 'active', // Add new archived filter, default to showing only active
+    archived: 'active',
   });
   
   const [sortMethod, setSortMethod] = useState('date-desc');
-  const [showModal, setShowModal] = useState(false);
-  const [modalContent, setModalContent] = useState(null);
   const [darkMode, setDarkMode] = useState(() => {
     const savedMode = localStorage.getItem('darkMode');
     return savedMode ? JSON.parse(savedMode) : false;
@@ -84,7 +73,7 @@ function App() {
         ...todo,
         dateCreated: new Date().toISOString(),
         dateUpdated: new Date().toISOString(),
-        isArchived: false, // Add isArchived property
+        isArchived: false,
       }, 
       ...todos
     ];
@@ -129,7 +118,7 @@ function App() {
     setTodos(updatedTodos);
   };
 
-  // Archive Task functionality
+  // Archive Todo
   const archiveTodo = id => {
     let updatedTodos = todos.map(todo => {
       if (todo.id === id) {
@@ -153,37 +142,6 @@ function App() {
           isArchived: false,
           archivedAt: null
         };
-      }
-      return todo;
-    });
-    setTodos(updatedTodos);
-  };
-
-  // Add new category
-  const addCategory = (category) => {
-    if (!category.name || /^\s*$/.test(category.name)) {
-      return;
-    }
-    
-    const newCategory = {
-      id: Math.floor(Math.random() * 10000),
-      name: category.name,
-      color: category.color || '#' + Math.floor(Math.random()*16777215).toString(16)
-    };
-    
-    setCategories([...categories, newCategory]);
-  };
-
-  // Remove category
-  const removeCategory = (id) => {
-    // Remove category from list
-    const updatedCategories = categories.filter(category => category.id !== id);
-    setCategories(updatedCategories);
-    
-    // Update todos that had this category
-    const updatedTodos = todos.map(todo => {
-      if (todo.categoryId === id) {
-        return { ...todo, categoryId: null };
       }
       return todo;
     });
@@ -244,140 +202,51 @@ function App() {
     })
   };
 
-  // Open settings modal
-  const openSettings = () => {
-    setModalContent('settings');
-    setShowModal(true);
-  };
-
-  // Open category manager
-  const openCategoryManager = () => {
-    setModalContent('categories');
-    setShowModal(true);
-  };
-
-
-  // // Add export functionality
-  // const exportData = (format) => {
-  //   // Prepare the data to export
-  //   const dataToExport = {
-  //     todos,
-  //     categories,
-  //     stats: {
-  //       total: stats.total,
-  //       active: stats.active,
-  //       completed: stats.completed,
-  //       archived: stats.archived
-  //     },
-  //     exportDate: new Date().toISOString()
-  //   };
-    
-  //   let fileContent;
-  //   let fileType;
-  //   let fileName;
-    
-  //   // Format based on selected format
-  //   if (format === 'json') {
-  //     fileContent = JSON.stringify(dataToExport, null, 2);
-  //     fileType = 'application/json';
-  //     fileName = 'task-manager-export.json';
-  //   } else if (format === 'csv') {
-  //     // Create CSV content
-  //     let csvContent = 'ID,Text,Status,Priority,Category,Created Date,Updated Date,Completed Date,Archived Date\n';
-      
-  //     todos.forEach(todo => {
-  //       const category = categories.find(cat => cat.id === todo.categoryId);
-  //       const status = todo.isArchived ? 'Archived' : todo.isComplete ? 'Completed' : 'Active';
-        
-  //       csvContent += `${todo.id},"${todo.text.replace(/"/g, '""')}",`;
-  //       csvContent += `${status},${todo.priority || 'none'},`;
-  //       csvContent += `${category ? category.name : 'None'},`;
-  //       csvContent += `${todo.dateCreated || ''},${todo.dateUpdated || ''},`;
-  //       csvContent += `${todo.completedAt || ''},${todo.archivedAt || ''}\n`;
-  //     });
-      
-  //     fileContent = csvContent;
-  //     fileType = 'text/csv';
-  //     fileName = 'task-manager-export.csv';
-  //   }
-    
-  //   // Create a blob and download the file
-  //   const blob = new Blob([fileContent], { type: fileType });
-  //   const url = URL.createObjectURL(blob);
-  //   const link = document.createElement('a');
-  //   link.href = url;
-  //   link.download = fileName;
-  //   document.body.appendChild(link);
-  //   link.click();
-  //   document.body.removeChild(link);
-  //   URL.revokeObjectURL(url);
-  // };
-
   return (
-    <div className={`app-container ${darkMode ? 'dark-mode' : ''}`}>
-      <div className="todo-app">
-        <Header />
-        
-        <div className="top-actions">
-          <button className="settings-button" onClick={openSettings}>
-            <FaCog /> Settings
-          </button>
-          <button className="categories-button" onClick={openCategoryManager}>
-            Manage Categories
-          </button>
-        </div>
-        
-        <TodoForm 
-          onSubmit={addTodo} 
-          categories={categories} 
-        />
-        
-        <FilterBar 
-          filter={filter} 
-          setFilter={setFilter} 
-          sortMethod={sortMethod} 
-          setSortMethod={setSortMethod}
-          categories={categories}
-        />
-        
-        <TodoList
-          todos={sortedTodos}
-          completeTodo={completeTodo}
-          removeTodo={removeTodo}
-          updateTodo={updateTodo}
-          archiveTodo={archiveTodo}
-          restoreTodo={restoreTodo}
-          categories={categories}
-        />
-        
-        <StatsPanel stats={stats} />
-        
-        {showModal && (
-          <Modal onClose={() => setShowModal(false)}>
-            {modalContent === 'categories' && (
-              <CategoryManager 
+    <Router>
+      <div className={`app-container ${darkMode ? 'dark-mode' : ''}`}>
+        <Routes>
+          <Route 
+            path="/" 
+            element={
+              <HomePage 
+                todos={todos}
+                setTodos={setTodos}
                 categories={categories}
-                addCategory={addCategory}
-                removeCategory={removeCategory}
-                onClose={() => setShowModal(false)}
+                setCategories={setCategories}
+                darkMode={darkMode}
+                stats={stats}
+                filter={filter}
+                setFilter={setFilter}
+                sortMethod={sortMethod}
+                setSortMethod={setSortMethod}
+                sortedTodos={sortedTodos}
+                addTodo={addTodo}
+                removeTodo={removeTodo}
+                updateTodo={updateTodo}
+                completeTodo={completeTodo}
+                archiveTodo={archiveTodo}
+                restoreTodo={restoreTodo}
               />
-            )}
-            {modalContent === 'settings' && (
-              <Settings
+            } 
+          />
+          <Route 
+            path="/settings" 
+            element={
+              <SettingsPage 
                 darkMode={darkMode}
                 setDarkMode={setDarkMode}
                 todos={todos}
-                categories={ categories }
+                categories={categories}
                 stats={stats}
                 setTodos={setTodos}
                 setCategories={setCategories}
-                onClose={() => setShowModal(false)}
               />
-            )}
-          </Modal>
-        )}
+            } 
+          />
+        </Routes>
       </div>
-    </div>
+    </Router>
   );
 }
 
