@@ -83,6 +83,7 @@ body.dark-mode {
   color: var(--text-secondary);
   cursor: pointer;
   transition: var(--transition);
+  text-decoration: none;
 }
 
 .settings-button:hover, .categories-button:hover {
