@@ -1,12 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import AppearanceSettings from '../components/settings/AppearanceSettings';
+import FunctionalitySettings from '../components/settings/FunctionalitySettings';
 import ExportSettings from '../components/settings/ExportSettings';
 import ImportSettings from '../components/settings/ImportSettings';
 import { FaArrowLeft } from 'react-icons/fa';
 import '../styles/pages/SettingsPage.css'; 
 
-function SettingsPage({ darkMode, setDarkMode, todos, categories, stats, setTodos, setCategories }) {
+
+function SettingsPage({ 
+  darkMode, setDarkMode, 
+  todos, categories, stats, 
+  setTodos, setCategories,
+  autoArchiveCompleted, setAutoArchiveCompleted
+}) {
   return (
     <div className="settings-page">
       <div className="settings-header">
@@ -20,6 +27,11 @@ function SettingsPage({ darkMode, setDarkMode, todos, categories, stats, setTodo
         <AppearanceSettings 
           darkMode={darkMode} 
           setDarkMode={setDarkMode} 
+        />
+        
+        <FunctionalitySettings
+          autoArchiveCompleted={autoArchiveCompleted}
+          setAutoArchiveCompleted={setAutoArchiveCompleted}
         />
         
         <ImportSettings 

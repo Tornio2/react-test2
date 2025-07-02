@@ -33,6 +33,10 @@
   background-color: var(--warning);
 }
 
+.notification.info {
+  background-color: var(--info);
+}
+
 .notification-icon {
   font-size: 18px;
 }

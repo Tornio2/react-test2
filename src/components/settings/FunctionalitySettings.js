@@ -4,7 +4,7 @@ import '../../styles/Settings.css';
 function FunctionalitySettings({ autoArchiveCompleted, setAutoArchiveCompleted }) {
   return (
     <div className="setting-section">
-      <h3>Task Management</h3>
+      <h3>Functionality</h3>
       <div className="setting-description">
         Configure how the app manages your tasks automatically.
       </div>

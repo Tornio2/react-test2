@@ -148,6 +148,8 @@ function App() {
 
   // Toggle todo completion
   const completeTodo = id => {
+    const targetTodo = todos.find(todo => todo.id === id);
+    
     let updatedTodos = todos.map(todo => {
       if (todo.id === id) {
         // If the task is being marked as complete and auto-archive is enabled
@@ -172,6 +174,15 @@ function App() {
       return todo;
     });
     setTodos(updatedTodos);
+    
+    // Show notifications based on what happened
+    if (targetTodo && !targetTodo.isComplete) {
+      if (autoArchiveCompleted) {
+        showNotification('Task completed and archived!', 'info');
+      } else {
+        showNotification('Task completed!', 'success');
+      }
+    }
   };
 
   // Archive Todo
@@ -186,6 +197,7 @@ function App() {
       }
       return todo;
     });
+    showNotification('Task archived!', 'info');
     setTodos(updatedTodos);
   };
 

@@ -19,10 +19,7 @@ function Settings({ darkMode, setDarkMode,
                 setDarkMode={setDarkMode} 
             />
 
-            <FunctionalitySettings
-                autoArchiveCompleted={autoArchiveCompleted}
-                setAutoArchiveCompleted={setAutoArchiveCompleted}
-            />
+            
             
             <ExportSettings 
                 todos={todos} 

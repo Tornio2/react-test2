@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { FaCheckCircle, FaTimes, FaExclamationTriangle } from 'react-icons/fa';
+import { FaCheckCircle, FaTimes, FaExclamationTriangle, FaArchive } from 'react-icons/fa';
 import '../styles/Notification.css'
 
 function Notification({ message, isVisible, onHide, type = 'success' }) {
@@ -8,17 +8,20 @@ function Notification({ message, isVisible, onHide, type = 'success' }) {
     // Success
     // Error
     // Warning
+    // Info
 
     const getNotificationIcon = () => {
     switch (type) {
-      case 'success':
-        return <FaCheckCircle className="notification-icon" />;
-      case 'error':
-        return <FaTimes className="notification-icon" />;
-      case 'warning':
-        return <FaExclamationTriangle className="notification-icon" />;
-      default:
-        return <FaCheckCircle className="notification-icon" />;
+        case 'success':
+            return <FaCheckCircle className="notification-icon" />;
+        case 'error':
+            return <FaTimes className="notification-icon" />;
+        case 'warning':
+            return <FaExclamationTriangle className="notification-icon" />;
+        case 'info':
+            return <FaArchive className="notification-icon" />;
+        default:
+            return <FaCheckCircle className="notification-icon" />;
     }
   };
 
