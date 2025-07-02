@@ -2,7 +2,7 @@
 
 A modern, feature-rich todo application built with React that helps you organize and manage your tasks efficiently.
 
-🔗 **[Live Demo](https://tornio2.github.io/react-test2/)**
+🔗 **https://tornio2.github.io/react-test2/**
 
 ## Features
 
@@ -18,11 +18,11 @@ A modern, feature-rich todo application built with React that helps you organize
 - 🔍 Search tasks by text
 - 🏷️ Filter by status, priority, category, or archived state
 - 📊 Sort tasks by date, priority, or alphabetically
-- 📈 View detailed statistics and analytics
+- 📈 View statistics and analytics
 - 🌙 Dark mode support
 - 💾 Data persistence with localStorage
 - 📤 Export tasks as JSON or CSV
-- 📥 Import tasks from JSON files
+- 📥 Import tasks from JSON and CSV files
 - 🔔 Smart notifications for user actions
 - ⚙️ Auto-archive completed tasks (optional)
 
