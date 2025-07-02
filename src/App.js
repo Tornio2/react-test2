@@ -3,6 +3,7 @@ import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import HomePage from './pages/HomePage';
 import SettingsPage from './pages/SettingsPage';
+import Notification from './components/Notification';
 
 function App() {
   const [todos, setTodos] = useState(() => {
@@ -12,6 +13,13 @@ function App() {
     } else {
       return [];
     }
+  });
+
+  // Notification state
+  const [notification, setNotification] = useState({
+    message: '',
+    isVisible: false,
+    type: 'success'
   });
 
   const [categories, setCategories] = useState(() => {
@@ -42,6 +50,23 @@ function App() {
     return savedMode ? JSON.parse(savedMode) : false;
   });
 
+  // Show notification function
+  const showNotification = (message, type = 'success') => {
+    setNotification({
+      message,
+      isVisible: true,
+      type
+    });
+  };
+
+   // Hide notification function
+  const hideNotification = () => {
+    setNotification(prev => ({
+      ...prev,
+      isVisible: false
+    }));
+  };
+
   // Store todos in localStorage
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos));
@@ -65,6 +90,8 @@ function App() {
   // Add Todo with category and priority
   const addTodo = (todo) => {
     if (!todo.text || /^\s*$/.test(todo.text)) {
+        showNotification('Task cannot be empty!', 'warning');
+
       return;
     }
 
@@ -78,6 +105,9 @@ function App() {
       ...todos
     ];
     setTodos(newTodos);
+
+    // Show notification when task is added
+    showNotification('Task added!');
   };
 
   // Update existing Todo
@@ -101,6 +131,8 @@ function App() {
   const removeTodo = id => {
     const removedArr = [...todos].filter(todo => todo.id !== id);
     setTodos(removedArr);
+    showNotification('Task deleted!', 'error');
+
   };
 
   // Toggle todo completion
@@ -245,6 +277,14 @@ function App() {
             } 
           />
         </Routes>
+
+        {/* Add the notification component */}
+        <Notification
+          message={notification.message}
+          isVisible={notification.isVisible}
+          onHide={hideNotification}
+          type={notification.type}
+        />
       </div>
     </Router>
   );
