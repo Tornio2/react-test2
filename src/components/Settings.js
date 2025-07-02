@@ -2,10 +2,14 @@ import React from 'react';
 import AppearanceSettings from './settings/AppearanceSettings';
 import ExportSettings from './settings/ExportSettings';
 import ImportSettings from './settings/ImportSettings';
+import FunctionalitySettings from './settings/FunctionalitySettings';
 import '../styles/Settings.css';
 
 
-function Settings({ darkMode, setDarkMode, todos, categories, stats, setTodos, setCategories, onClose }) {
+function Settings({ darkMode, setDarkMode, 
+  todos, categories, stats, 
+  setTodos, setCategories,
+  autoArchiveCompleted, setAutoArchiveCompleted }) {
     return (
         <div className="settings-panel">
             <h2>Settings</h2>
@@ -13,6 +17,11 @@ function Settings({ darkMode, setDarkMode, todos, categories, stats, setTodos, s
             <AppearanceSettings 
                 darkMode={darkMode} 
                 setDarkMode={setDarkMode} 
+            />
+
+            <FunctionalitySettings
+                autoArchiveCompleted={autoArchiveCompleted}
+                setAutoArchiveCompleted={setAutoArchiveCompleted}
             />
             
             <ExportSettings 

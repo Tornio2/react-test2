@@ -22,6 +22,12 @@ function App() {
     type: 'success'
   });
 
+  // Auto-archive setting
+  const [autoArchiveCompleted, setAutoArchiveCompleted] = useState(() => {
+    const savedSetting = localStorage.getItem('autoArchiveCompleted');
+    return savedSetting ? JSON.parse(savedSetting) : false;
+  });
+
   const [categories, setCategories] = useState(() => {
     const savedCategories = localStorage.getItem('categories');
     if (savedCategories) {
@@ -66,6 +72,11 @@ function App() {
       isVisible: false
     }));
   };
+
+  // Save auto-archive setting to localStorage
+  useEffect(() => {
+    localStorage.setItem('autoArchiveCompleted', JSON.stringify(autoArchiveCompleted));
+  }, [autoArchiveCompleted]);
 
   // Store todos in localStorage
   useEffect(() => {
@@ -139,11 +150,24 @@ function App() {
   const completeTodo = id => {
     let updatedTodos = todos.map(todo => {
       if (todo.id === id) {
-        return {
-          ...todo, 
-          isComplete: !todo.isComplete,
-          completedAt: !todo.isComplete ? new Date().toISOString() : null
-        };
+        // If the task is being marked as complete and auto-archive is enabled
+        if (!todo.isComplete && autoArchiveCompleted) {
+          return {
+            ...todo, 
+            isComplete: true,
+            completedAt: new Date().toISOString(),
+            isArchived: true,
+            archivedAt: new Date().toISOString()
+          };
+        } 
+        // Otherwise just toggle the complete state
+        else {
+          return {
+            ...todo, 
+            isComplete: !todo.isComplete,
+            completedAt: !todo.isComplete ? new Date().toISOString() : null
+          };
+        }
       }
       return todo;
     });
@@ -179,6 +203,8 @@ function App() {
     });
     setTodos(updatedTodos);
   };
+
+  
 
   // Filter todos based on current filters
   const filteredTodos = todos.filter(todo => {
@@ -273,12 +299,15 @@ function App() {
                 stats={stats}
                 setTodos={setTodos}
                 setCategories={setCategories}
+
+                autoArchiveCompleted={autoArchiveCompleted}
+                setAutoArchiveCompleted={setAutoArchiveCompleted}
               />
             } 
           />
         </Routes>
 
-        {/* Add the notification component */}
+        {/* Notification component */}
         <Notification
           message={notification.message}
           isVisible={notification.isVisible}

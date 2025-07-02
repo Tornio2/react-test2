@@ -220,3 +220,26 @@
 .import-options .setting-item label {
   font-size: 14px;
 }
+
+.setting-checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+  color: var(--text-primary);
+  font-size: 16px;
+}
+
+.setting-checkbox {
+  margin-top: 4px;
+}
+
+.setting-label-text {
+  font-weight: 500;
+}
+
+.setting-help-text {
+  margin: 5px 0 0 30px;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
